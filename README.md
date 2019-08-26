@@ -5,28 +5,66 @@
 2. show、dismiss等严格被Fragment生命周期托管，不会出现内存泄露
 3. 支持自定义，扩展性高
 
-**Show：**
+**Show**
+***AlertDialog:***
 
-![效果图](https://github.com/lvTravler/Android-AlertDialogFragment/blob/master/app/image/show.png)
+![AlertDialog](https://github.com/lvTravler/Android-AlertDialogFragment/blob/master/app/image/AlertDialog.png)
 
+***ProgressDialog:***
+
+![ProgressDialog](https://github.com/lvTravler/Android-AlertDialogFragment/blob/master/app/image/ProgressDialog.png)
+
+***SuccessDialog:***
+
+![SuccessDialog](https://github.com/lvTravler/Android-AlertDialogFragment/blob/master/app/image/SuccessDialog.png)
+
+***ErrorDialog:***
+
+![ErrorDialog](https://github.com/lvTravler/Android-AlertDialogFragment/blob/master/app/image/ErrorDialog.png)
 
 **Usage**
 ```
- AlertDialog.with(MainActivity.this)
-    .setCancelable(true)
-    .setContent("Android Alert DialogFragment Content")
-    .setTitle("AlertDialog Title")
-    .setPositiveButton("confirm", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Toast.makeText(MainActivity.this, "click confirm", Toast.LENGTH_SHORT).show();
-                            }
-                        }).setNegativeButton("cancel", new View.OnClickListener() {
+   public void showAlertDialog() {
+        AlertDialog.with(MainActivity.this)
+                .setCancelable(true)
+                .setContent("Android Alert DialogFragment Content")
+                .setTitle("AlertDialog Title")
+                .setPositiveButton("success", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, "click cancel", Toast.LENGTH_SHORT).show();
+                        showSuccessDialog();
                     }
-                }).show();
+                }).setNegativeButton("error", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showErrorDialog();
+            }
+        }).show();
+    }
+
+    public void showErrorDialog() {
+        StatusDialog.with(MainActivity.this)
+                .setCancelable(false)
+                .setPrompt("load error")
+                .setType(StatusDialog.Type.ERROR)
+                .show();
+    }
+
+    public void showSuccessDialog() {
+        StatusDialog.with(MainActivity.this)
+                .setCancelable(false)
+                .setPrompt("load success")
+                .setType(StatusDialog.Type.SUCCESS)
+                .show();
+    }
+
+    public void showProgressDialog() {
+        StatusDialog.with(MainActivity.this)
+                .setCancelable(false)
+                .setPrompt("loading…")
+                .setType(StatusDialog.Type.PROGRESS)
+                .show();
+    }
 ```
 
 **It feels good，Please Star,Thank you!**
