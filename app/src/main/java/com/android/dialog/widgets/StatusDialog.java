@@ -119,6 +119,12 @@ public class StatusDialog extends Dialog {
     }
 
     @Override
+    public void dismiss() {
+        super.dismiss();
+        cancelTimer();
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         cancelTimer();
