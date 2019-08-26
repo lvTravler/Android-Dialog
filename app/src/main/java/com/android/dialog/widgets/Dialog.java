@@ -46,6 +46,10 @@ public class Dialog extends AppCompatDialogFragment implements View.OnClickListe
         show(activity.getSupportFragmentManager(), activity.getClass().getSimpleName());
     }
 
+    protected boolean isNonEmpty(String content) {
+        return !TextUtils.isEmpty(content);
+    }
+
     @Nullable
     @Override
     public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

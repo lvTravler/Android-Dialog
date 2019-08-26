@@ -46,10 +46,18 @@ public class AlertDialog extends Dialog {
         TextView tvDialogCommonNegative = view.findViewById(R.id.tv_dialog_common_negative);
 
         //填充数据
-        tvDialogCommonTitle.setText(mDialogParams.title);
-        tvDialogCommonContent.setText(mDialogParams.content);
-        tvDialogCommonPositive.setText(mDialogParams.positive);
-        tvDialogCommonNegative.setText(mDialogParams.negative);
+        if (isNonEmpty(mDialogParams.title)) {
+            tvDialogCommonTitle.setText(mDialogParams.title);
+        }
+        if (isNonEmpty(mDialogParams.content)) {
+            tvDialogCommonContent.setText(mDialogParams.content);
+        }
+        if (isNonEmpty(mDialogParams.positive)) {
+            tvDialogCommonPositive.setText(mDialogParams.positive);
+        }
+        if (isNonEmpty(mDialogParams.negative)) {
+            tvDialogCommonNegative.setText(mDialogParams.negative);
+        }
 
         //监听
         tvDialogCommonPositive.setOnClickListener(this);

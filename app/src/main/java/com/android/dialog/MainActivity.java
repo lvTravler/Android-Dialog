@@ -1,18 +1,22 @@
 package com.android.dialog;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.android.dialog.widgets.AlertDialog;
+import com.android.dialog.widgets.StatusDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Handler mHandler = new Handler();
+    private StatusDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,24 +29,58 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.with(MainActivity.this)
-                        .setCancelable(true)
-                        .setContent("Android Alert DialogFragment Content")
-                        .setTitle("AlertDialog Title")
-                        .setPositiveButton("confirm", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Toast.makeText(MainActivity.this, "click confirm", Toast.LENGTH_SHORT).show();
-                            }
-                        }).setNegativeButton("cancel", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, "click cancel", Toast.LENGTH_SHORT).show();
-                    }
-                }).show();
-
+                showProgressDialog();
             }
         });
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.with(MainActivity.this)
+                .setCancelable(true)
+                .setContent("Android Alert DialogFragment Content")
+                .setTitle("AlertDialog Title")
+                .setPositiveButton("success", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showSuccessDialog();
+                    }
+                }).setNegativeButton("error", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showErrorDialog();
+            }
+        }).show();
+    }
+
+    private void showErrorDialog() {
+        StatusDialog.with(MainActivity.this)
+                .setCancelable(false)
+                .setPrompt("load error")
+                .setType(StatusDialog.Type.ERROR)
+                .show();
+    }
+
+    private void showSuccessDialog() {
+        StatusDialog.with(MainActivity.this)
+                .setCancelable(false)
+                .setPrompt("load success")
+                .setType(StatusDialog.Type.SUCCESS)
+                .show();
+    }
+
+    private void showProgressDialog() {
+        mProgressDialog = StatusDialog.with(MainActivity.this)
+                .setCancelable(false)
+                .setPrompt("loading…")
+                .setType(StatusDialog.Type.PROGRESS)
+                .show();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mProgressDialog.dismiss();
+                showAlertDialog();
+            }
+        }, 3000);
     }
 
     @Override
