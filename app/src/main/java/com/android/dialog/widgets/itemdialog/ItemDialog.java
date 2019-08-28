@@ -10,8 +10,6 @@ import com.android.dialog.widgets.Dialog;
 import java.util.List;
 
 import androidx.annotation.ColorRes;
-import androidx.annotation.DimenRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
@@ -22,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @Copyright (C)seengene
- * @Package: com.seengene.ar_guide.ui.widgets
+ * @Package: open.ui.widgets
  * @ClassName: ItemDialog
  * @Description: 适用于重复性数据展示，例如使用RecyclerView展示
  * @Author: seengene_lvTravler
@@ -63,7 +61,7 @@ public class ItemDialog extends Dialog implements BaseViewHolder.OnItemClickList
                 recDialogItemShow.setLayoutManager(new GridLayoutManager(getContext(), mDialogParams.spanCount));
                 break;
         }
-        ItemDialogAdapter adapter = new ItemDialogAdapter(getContext(), mDialogParams.itemLayout, null);
+        ItemDialogAdapter adapter = new ItemDialogAdapter(getContext(), R.layout.item_item_dialog, null);
         recDialogItemShow.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
         adapter.refreshAdapter(mDialogParams.data);
@@ -112,16 +110,6 @@ public class ItemDialog extends Dialog implements BaseViewHolder.OnItemClickList
          */
         int spanCount = -1;
         /**
-         * 字体颜色
-         */
-        @ColorRes
-        int textColor = -1;
-        /**
-         * 字体大小
-         */
-        @DimenRes
-        int textSize = -1;
-        /**
          * 展示数据
          */
         List<ItemBean> data;
@@ -139,10 +127,6 @@ public class ItemDialog extends Dialog implements BaseViewHolder.OnItemClickList
          * 背景颜色
          */
         int backgroundColor = -1;
-        /**
-         * RecyclerView Item布局
-         */
-        int itemLayout = -1;
         /**
          * 动画
          */
@@ -167,16 +151,6 @@ public class ItemDialog extends Dialog implements BaseViewHolder.OnItemClickList
 
         public Builder setSpanCount(int val) {
             P.spanCount = val;
-            return this;
-        }
-
-        public Builder setTextColor(@ColorRes int val) {
-            P.textColor = val;
-            return this;
-        }
-
-        public Builder setTextSize(@DimenRes int val) {
-            P.textSize = val;
             return this;
         }
 
@@ -205,11 +179,6 @@ public class ItemDialog extends Dialog implements BaseViewHolder.OnItemClickList
             return this;
         }
 
-        public Builder setItemLayout(@LayoutRes int val) {
-            P.itemLayout = val;
-            return this;
-        }
-
         public Builder setAnimations(@StyleRes int val) {
             P.animations = val;
             return this;
@@ -224,9 +193,6 @@ public class ItemDialog extends Dialog implements BaseViewHolder.OnItemClickList
                 throw new IllegalArgumentException("Please set showType");
             }
 
-            if (P.itemLayout == -1) {
-                throw new IllegalArgumentException("Please set itemLayout");
-            }
             dialog.show(activity);
             return dialog;
         }

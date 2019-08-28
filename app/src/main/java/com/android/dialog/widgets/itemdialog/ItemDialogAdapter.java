@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 /**
  * @Copyright (C)seengene
- * @Package: com.seengene.ar_guide.ui.widgets.itemdialog
+ * @Package: open.ui.widgets.itemdialog
  * @ClassName: ItemDialogAdapter
  * @Description: $DESC$
  * @Author: seengene_lvTravler

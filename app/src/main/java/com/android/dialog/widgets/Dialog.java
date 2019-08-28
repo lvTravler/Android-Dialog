@@ -20,8 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 /**
- * @Copyright (C)seengene
- * @Package: com.seengene.ar_guide.ui.widgets
+ * @Copyright (C)open
+ * @Package: open.ui.widgets
  * @ClassName: Dialog
  * @Description: Dialog
  * @Author: seengene_lvTravler

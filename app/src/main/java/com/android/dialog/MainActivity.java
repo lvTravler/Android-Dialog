@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setSpanCount(itemBeanList.size())
                 .setAnimations(R.style.Dialog_Anim_Bottom_In_Bottom_Out)
-                .setItemLayout(R.layout.item_item_dialog)
                 .setGravity(Gravity.BOTTOM)
                 .setShowType(ItemDialog.ShowType.GRID)
                 .show();
