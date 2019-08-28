@@ -9,4 +9,6 @@
     <dimen name="dialog_divider">0.5sp</dimen>
     <dimen name="dialog_margin_left_right">25dp</dimen>
     <dimen name="dialog_content_line_space">8dp</dimen>
+
+    <dimen name="dialog_item_image_height_width">60dp</dimen>
 </resources>

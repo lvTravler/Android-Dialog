@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Android Dialog</string>
     <string name="action_settings">Settings</string>
+
+    <string name="wechat_friends">微信好友</string>
+    <string name="wechat_collect">微信收藏</string>
+    <string name="wechat_of_circle_friends">朋友圈</string>
 </resources>

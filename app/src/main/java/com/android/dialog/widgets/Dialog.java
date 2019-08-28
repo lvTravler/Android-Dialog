@@ -5,18 +5,23 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 /**
- * @Copyright (C)open
+ * @Copyright (C)seengene
+ * @Package: com.seengene.ar_guide.ui.widgets
  * @ClassName: Dialog
  * @Description: Dialog
  * @Author: seengene_lvTravler
@@ -27,10 +32,10 @@ import androidx.appcompat.app.AppCompatDialogFragment;
  * @Version: 1.0
  */
 public class Dialog extends AppCompatDialogFragment implements View.OnClickListener {
-    private DialogParams dialogParams;
+    private DialogParams mDialogParams;
 
     public Dialog() {
-        this.dialogParams = new DialogParams();
+        this.mDialogParams = new DialogParams();
     }
 
     protected void show(AppCompatActivity activity, String tag) {
@@ -41,6 +46,9 @@ public class Dialog extends AppCompatDialogFragment implements View.OnClickListe
         }
     }
 
+    public static Builder newBuilder(AppCompatActivity activity) {
+        return new Builder(activity);
+    }
 
     protected void show(AppCompatActivity activity) {
         show(activity.getSupportFragmentManager(), activity.getClass().getSimpleName());
@@ -55,15 +63,46 @@ public class Dialog extends AppCompatDialogFragment implements View.OnClickListe
     public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //getDialog().setCancelable(setCancelable());
         getDialog().setCanceledOnTouchOutside(setCancelable());
+        Window window = getDialog().getWindow();
+        int animationsRes = setAnimations();
+        if (animationsRes != 0 && animationsRes != -1) {
+            window.setWindowAnimations(animationsRes);
+        }
         setCancelable(setCancelable());
         //设置背景透明
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        int gravity = setGravity();
+        if (gravity != -1 && gravity != 0) {//即未设置
+            window.setGravity(gravity);
+        }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(params);
+    }
+
+    /**
+     * @return
+     * @see Gravity
+     */
+    protected int setGravity() {
+        return Gravity.CENTER;
+    }
 
     protected boolean setCancelable() {
-        return dialogParams.isCancelable;
+        return mDialogParams.isCancelable;
+    }
+
+    @StyleRes
+    protected int setAnimations() {
+        return mDialogParams.animations;
     }
 
     @NonNull
@@ -77,7 +116,7 @@ public class Dialog extends AppCompatDialogFragment implements View.OnClickListe
     }
 
     protected int setLayoutRes() {
-        return dialogParams.contentView;
+        return mDialogParams.contentView;
     }
 
     @Override
@@ -100,7 +139,7 @@ public class Dialog extends AppCompatDialogFragment implements View.OnClickListe
 
         private Builder(AppCompatActivity activity) {
             dialog = new Dialog();
-            P = dialog.dialogParams;
+            P = dialog.mDialogParams;
             P.activity = activity;
         }
 

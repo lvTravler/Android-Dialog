@@ -2,13 +2,19 @@ package com.android.dialog;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.dialog.utils.Utils;
 import com.android.dialog.widgets.AlertDialog;
 import com.android.dialog.widgets.StatusDialog;
+import com.android.dialog.widgets.itemdialog.ItemBean;
+import com.android.dialog.widgets.itemdialog.ItemDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +38,31 @@ public class MainActivity extends AppCompatActivity {
                 showProgressDialog();
             }
         });
+        findViewById(R.id.tv_act_main_click).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showItemDialog();
+            }
+        });
+    }
+
+    private void showItemDialog() {
+        List<ItemBean> itemBeanList = Utils.getItemBeanList();
+        ItemDialog.with(MainActivity.this)
+                .setCancelable(true)
+                .setData(itemBeanList)
+                .setOnItemClickListener(new ItemDialog.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position, ItemBean itemData) {
+                        showSuccessDialog();
+                    }
+                })
+                .setSpanCount(itemBeanList.size())
+                .setAnimations(R.style.Dialog_Anim_Bottom_In_Bottom_Out)
+                .setItemLayout(R.layout.item_item_dialog)
+                .setGravity(Gravity.BOTTOM)
+                .setShowType(ItemDialog.ShowType.GRID)
+                .show();
     }
 
     private void showAlertDialog() {
@@ -63,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     private void showSuccessDialog() {
         StatusDialog.with(MainActivity.this)
                 .setCancelable(false)
-                .setPrompt("load success")
+                .setPrompt("success")
                 .setType(StatusDialog.Type.SUCCESS)
                 .show();
     }

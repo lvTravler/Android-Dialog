@@ -22,4 +22,9 @@
         <item name="android:layout_height">@dimen/dialog_divider</item>
         <item name="android:background">@color/dialog_divider</item>
     </style>
+
+    <style name="Dialog_Anim_Bottom_In_Bottom_Out" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_bottom_out</item>
+    </style>
 </resources>
