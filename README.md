@@ -6,6 +6,7 @@
 3. 支持自定义，扩展性高
 
 **Show**
+
 ***AlertDialog:***
 
 ![AlertDialog](https://github.com/lvTravler/Android-AlertDialogFragment/blob/master/app/image/AlertDialog.png)
@@ -22,6 +23,9 @@
 
 ![ErrorDialog](https://github.com/lvTravler/Android-AlertDialogFragment/blob/master/app/image/ErrorDialog.png)
 
+***BottomDialog:***
+
+![BottomDialog](https://github.com/lvTravler/Android-AlertDialogFragment/blob/master/app/image/ItemDialog.png)
 **Usage**
 ```
    public void showAlertDialog() {
@@ -63,6 +67,24 @@
                 .setCancelable(false)
                 .setPrompt("loading…")
                 .setType(StatusDialog.Type.PROGRESS)
+                .show();
+    }
+    
+   public void showItemDialog() {
+        List<ItemBean> itemBeanList = Utils.getItemBeanList();
+        ItemDialog.with(MainActivity.this)
+                .setCancelable(true)
+                .setData(itemBeanList)
+                .setOnItemClickListener(new ItemDialog.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position, ItemBean itemData) {
+                        showSuccessDialog();
+                    }
+                })
+                .setSpanCount(itemBeanList.size())
+                .setAnimations(R.style.Dialog_Anim_Bottom_In_Bottom_Out)
+                .setGravity(Gravity.BOTTOM)
+                .setShowType(ItemDialog.ShowType.GRID)
                 .show();
     }
 ```
