@@ -1,6 +1,7 @@
 package com.android.dialog.widgets;
 
 import android.app.AlertDialog;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class Dialog extends AppCompatDialogFragment implements View.OnClickListe
         show(activity.getSupportFragmentManager(), activity.getClass().getSimpleName());
     }
 
+
     protected boolean isNonEmpty(String content) {
         return !TextUtils.isEmpty(content);
     }
@@ -86,6 +88,12 @@ public class Dialog extends AppCompatDialogFragment implements View.OnClickListe
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(params);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        dismiss();
+        super.onConfigurationChanged(newConfig);
     }
 
     /**

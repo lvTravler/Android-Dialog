@@ -33,7 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ItemDialog extends Dialog implements BaseViewHolder.OnItemClickListener<ItemBean> {
     private DialogParams mDialogParams;
 
-    private ItemDialog() {
+    public ItemDialog() {
         mDialogParams = new DialogParams();
     }
 

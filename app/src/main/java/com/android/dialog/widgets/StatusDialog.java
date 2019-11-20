@@ -38,7 +38,7 @@ public class StatusDialog extends Dialog {
     private DialogParams mDialogParams;
     private Timer mDelayTimer;
 
-    private StatusDialog() {
+    public StatusDialog() {
         mDialogParams = new DialogParams();
     }
 

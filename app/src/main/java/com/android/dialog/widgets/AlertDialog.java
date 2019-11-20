@@ -25,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AlertDialog extends Dialog {
     private DialogParams mDialogParams;
 
-    private AlertDialog() {
+    public AlertDialog() {
         mDialogParams = new DialogParams();
     }
 
